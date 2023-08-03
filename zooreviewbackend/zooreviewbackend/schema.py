@@ -1,7 +1,7 @@
 import graphene
 from graphene_django import DjangoObjectType
 
-from zooreviewbackend.users.models import User
+from users.models import User
 
 class UserType(DjangoObjectType):
     class Meta:
