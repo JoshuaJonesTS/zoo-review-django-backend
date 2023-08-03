@@ -12,9 +12,9 @@ class User(models.Model):
             MinLengthValidator(8, 'the field must contain at least 8 characters')
         ]
     )
-    bio = models.CharField()
-    avatar = models.CharField()
-    random_string = models.CharField() # browser cookie
+    bio = models.CharField(max_length=200)
+    avatar = models.CharField(max_length=1000)
+    random_string = models.CharField(max_length=1000) # browser cookie
     verified = models.BooleanField()
-    liked_blogs = models.JSONField() # ArrayField would work w/ PostgreSQL database
-    disliked_blogs = models.JSONField() 
+    # liked_blogs = models.JSONField() # ArrayField would work w/ PostgreSQL database
+    # disliked_blogs = models.JSONField() 
