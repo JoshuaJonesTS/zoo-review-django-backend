@@ -1,4 +1,4 @@
-import graphine
+import graphene
 from graphene_django import DjangoObjectType
 
 from zooreviewbackend.users.models import User
@@ -8,8 +8,8 @@ class UserType(DjangoObjectType):
         model = User
         fields = ("first_name", "last_name", "username", "email", "password", "bio", "avatar", "random_string", "verified")
 
-class Query(graphine.ObjectType):
-    all_users = graphine.List(UserType)
+class Query(graphene.ObjectType):
+    all_users = graphene.List(UserType)
 
     def resolve_user_by_name(root, info, username):
         try:
@@ -17,4 +17,4 @@ class Query(graphine.ObjectType):
         except User.DoesNotExist:
             return None
     
-schema = graphine.Schema(query=Query)
+schema = graphene.Schema(query=Query)
