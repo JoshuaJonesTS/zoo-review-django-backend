@@ -6,15 +6,12 @@ from users.models import User
 class UserType(DjangoObjectType):
     class Meta:
         model = User
-        fields = ("first_name", "last_name", "username", "email", "password", "bio", "avatar", "random_string", "verified")
+        fields = ("__all__")
 
 class Query(graphene.ObjectType):
     all_users = graphene.List(UserType)
 
-    def resolve_user_by_name(root, info, username):
-        try:
-            return User.objects.get(username=username)
-        except User.DoesNotExist:
-            return None
-    
+    def resolve_all_users(root, info):
+        return User.objects.all()
+
 schema = graphene.Schema(query=Query)
