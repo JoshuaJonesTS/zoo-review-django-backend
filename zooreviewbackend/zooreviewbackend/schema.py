@@ -11,7 +11,10 @@ class UserType(DjangoObjectType):
 class Query(graphine.ObjectType):
     all_users = graphine.List(UserType)
 
-    def resolve_all_users(root, info):
-        return User.objects.select_related("user").all()
+    def resolve_user_by_name(root, info, username):
+        try:
+            return User.objects.get(username=username)
+        except User.DoesNotExist:
+            return None
     
 schema = graphine.Schema(query=Query)
